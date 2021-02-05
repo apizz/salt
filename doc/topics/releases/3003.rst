@@ -17,3 +17,9 @@ Changed
   ``os_family`` grain will now resolve as ``RedHat``.  This may require changes
   to existing uses of :py:func:`grains.filter_by
   <salt.modules.grains.filter_by>`
+
+Salt Cloud
+==========
+
+The Google Cloud Engine salt-cloud provider now requires `apache-libcloud>=2.5.0`.
+Service account authentication is broken on older versions.
