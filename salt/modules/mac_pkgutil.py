@@ -51,7 +51,7 @@ def info(package_id):
     """
     Return information regarding a package id.
 
-    :return: A dictionary of pkginfo for a package id.
+    :return: A dictionary of pkginfo for a package ID.
     :rtype: dict
 
     .. code-block:: bash
@@ -70,7 +70,7 @@ def info(package_id):
 
 def is_installed(package_id):
     """
-    Returns whether a given package id is installed.
+    Returns whether a given package ID is installed.
 
     :return: True if installed, otherwise False
     :rtype: bool
