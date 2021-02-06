@@ -153,7 +153,7 @@ def forget(package_id):
 
 def version(package_id):
     """
-    Returns a given package id's version.
+    Returns the version of a given package ID.
 
     :return: Package id version string
     :rtype: string
