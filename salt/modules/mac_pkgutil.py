@@ -149,3 +149,20 @@ def forget(package_id):
     cmd = "pkgutil --forget {}".format(package_id)
     salt.utils.mac_utils.execute_return_success(cmd)
     return not is_installed(package_id)
+
+
+def version(package_id):
+    """
+    Returns a given package id's version.
+
+    :return: Package id version string
+    :rtype: string
+
+    CLI Example:
+
+    .. code-block:: bash
+
+        salt '*' pkgutil.version com.apple.pkg.gcc4.2Leo
+    """
+    ret = info(package_id)
+    return ret['version']
