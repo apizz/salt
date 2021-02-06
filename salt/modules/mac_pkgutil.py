@@ -47,6 +47,23 @@ def list_():
     return ret.splitlines()
 
 
+def info(package_id):
+    """
+    Return information regarding a package id.
+
+    :return: A dictionary of pkginfo for a package id.
+    :rtype: dict
+
+    .. code-block:: bash
+
+        salt '*' pkgutil.info com.apple.pkg.gcc4.2Leo
+    """
+    cmd = 'pkgutil --pkg-info {}'.format(package_id)
+    result = salt.utils.mac_utils.execute_return_result(cmd)
+    ret = dict(item.split(':') for item in result.splitlines())
+    return ret
+
+
 def is_installed(package_id):
     """
     Returns whether a given package id is installed.
@@ -71,7 +88,7 @@ def _install_from_path(path):
         msg = "File not found: {}".format(path)
         raise SaltInvocationError(msg)
 
-    cmd = 'installer -pkg "{}" -target /'.format(path)
+    cmd = 'installer -pkg {} -target /'.format(path)
     return salt.utils.mac_utils.execute_return_success(cmd)
 
 
