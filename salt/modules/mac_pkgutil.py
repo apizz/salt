@@ -5,6 +5,7 @@ Installer is the native .pkg/.mpkg package manager for macOS.
 """
 
 import os.path
+import time
 import urllib
 
 import salt.utils.itertools
@@ -124,6 +125,32 @@ def install(source, package_id):
     _install_from_path(source)
 
     return is_installed(package_id)
+
+
+def install_time(package_id, convert=None):
+    """
+    Returns the install date and time of a given package ID in epoch time. Alternatively,
+    converts to YYYY/MM/DD hh:mm:ss (%Y-%m-%d %H:%M:%S)
+
+    :param bool convert
+
+    :return: The install datetime of the given package ID
+    :rtype: date
+
+    CLI Example:
+
+    .. code-block:: bash
+        salt '*' pkgutil.install_date com.apple.pkg.gcc4.2Leo
+
+    """
+    time_fmt = '%Y-%m-%d %H:%M:%S'
+    pkginfo = info(package_id)
+    install_datetime = int(pkginfo['install-time'])
+    if not convert:
+        ret = install_datetime
+    else:
+        ret = time.strftime(time_fmt, time.localtime(install_datetime))
+    return ret
 
 
 def forget(package_id):
