@@ -59,8 +59,12 @@ def info(package_id):
         salt '*' pkgutil.info com.apple.pkg.gcc4.2Leo
     """
     cmd = 'pkgutil --pkg-info {}'.format(package_id)
-    result = salt.utils.mac_utils.execute_return_result(cmd)
-    ret = dict(item.split(':') for item in result.splitlines())
+    if is_installed(package_id):
+        result = salt.utils.mac_utils.execute_return_result(cmd)
+        ret = dict(item.split(':') for item in result.splitlines())
+    else:
+        msg = 'Package ID {} is not installed'.format(package_id)
+        raise SaltInvocationError(msg)
     return ret
 
 
