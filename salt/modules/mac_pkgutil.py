@@ -140,6 +140,7 @@ def install_time(package_id, convert=None):
     CLI Example:
 
     .. code-block:: bash
+
         salt '*' pkgutil.install_date com.apple.pkg.gcc4.2Leo
 
     """
